@@ -1,3 +1,6 @@
+source 'https://rubygems.org'
+ruby '2.3.3'
 
-# Added at 2018-05-31 02:15:02 -0700 by Brett:
 gem "dotenv", "~> 2.2"
+gem "http", "~> 2.2"
+gem "awesome_print", "~> 1.8"
