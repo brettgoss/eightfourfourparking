@@ -26,7 +26,7 @@ PLATFORMS
 
 DEPENDENCIES
   awesome_print (~> 1.8)
-  dotenv (~> 2.2)
+  dotenv (~> 2.4)
   http (~> 2.2)
 
 RUBY VERSION
