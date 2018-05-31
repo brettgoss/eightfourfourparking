@@ -19,6 +19,7 @@ module Helpers
     puts "Getting: " + endpoint
     res = HTTP.basic_auth(:user => ENV['CLIENT_ID'], :pass => ENV['CLIENT_SECRET'])
       .get(build_url(endpoint)).to_s
+    JSON.parse(res)
   end
 
   def post(endpoint, body)
@@ -26,5 +27,6 @@ module Helpers
     res = HTTP.basic_auth(:user => ENV['CLIENT_ID'], :pass => ENV['CLIENT_SECRET'])
       .headers("Content-Type" => "application/json")
       .post(build_url(endpoint), :body => body).to_s
+    JSON.parse(res)
   end
 end

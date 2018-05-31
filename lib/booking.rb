@@ -14,7 +14,7 @@ class Booking
 
   def get_slip
     res = Helpers::get('item/4?start_date=monday&end_date=monday+4days')
-    JSON.parse(res)['item']['rate']['slip']
+    res['item']['rate']['slip']
   end
 
   def post_slip_to_session(slip)
@@ -22,8 +22,8 @@ class Booking
       "slip": slip
     })
     res = Helpers::post("booking/session", json_body)
-    ap JSON.parse(res)
-    JSON.parse(res)['booking']['session']['id']
+    ap res
+    res['booking']['session']['id']
   end
 
   def create_booking_from_session(session_id)
@@ -36,7 +36,7 @@ class Booking
     })
     puts session_id
     res = Helpers::post("booking/create", json_body)
-    ap JSON.parse(res)
+    ap res
   end
 end
 
