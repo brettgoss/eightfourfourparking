@@ -9,6 +9,7 @@ class Booking
   def initialize
     @slip = get_slip
     @session_id = post_slip_to_session(@slip)
+    @customer = get_customer_details(ENV['CUSTOMER_CODE'])
     create_booking_from_session(@session_id)
   end
 
@@ -26,17 +27,23 @@ class Booking
     res['booking']['session']['id']
   end
 
-  def create_booking_from_session(session_id)
+  def create_booking_from_session(session_id, customer = {})
     json_body = JSON.generate({
       "session_id": session_id,
       "form": {
-        "customer_name": "#{ENV['CUSTOMER_NAME']}",
-        "customer_email": "#{ENV['CUSTOMER_EMAIL']}"
+        "customer_name": customer['customer_name'],
+        "customer_email": customer['customer_email']
       }
     })
-    puts session_id
+
     res = Helpers::post("booking/create", json_body)
     ap res
+  end
+
+  def get_customer_details(customer_code)
+    customer = Helpers::get("customer/#{customer_code}")['customer']
+    customer.delete("bookings")
+    return customer
   end
 end
 
