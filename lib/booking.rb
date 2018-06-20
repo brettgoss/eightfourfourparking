@@ -14,15 +14,15 @@ class Booking
   end
 
   def get_slip
-    res = Helpers::get('item/4?start_date=monday&end_date=monday+4days')
+    res = Helpers::get('item/19?start_date=tomorrow&start_time=1200&end_time=1800')
     slip = res['item']['rate']['slip']
-    avail = res['item']['rate']['status']
+    status = res['item']['rate']['status']
 
     if slip.nil?
-      ap avail
+      ap status
       exit
     else
-      ap avail
+      ap status
       return slip
     end
   end
